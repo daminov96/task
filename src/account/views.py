@@ -26,18 +26,6 @@ class TokenGenerateView(JWTTokenObtainPairView):
     def get_serializer_context(self):
         return {'request': self.request}
 
-    # @swagger_auto_schema(operation_id='token_obtain', operation_description='Token obtaining', responses=post_responses)
-    # def post(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #
-    #     try:
-    #         serializer.is_valid(raise_exception=True)
-    #     except TokenError as e:
-    #         raise InvalidToken(e.args[0])
-    #     else:
-    #         data = serializer.validated_data
-    #     return response.Response(data, status=rest_status.HTTP_201_CREATED)
-
 
 class TokenRefreshView(JWTTokenRefreshView):
     post_responses = {
@@ -45,9 +33,3 @@ class TokenRefreshView(JWTTokenRefreshView):
         rest_status.HTTP_404_NOT_FOUND: openapi.Response(description='Token not found'),
         rest_status.HTTP_400_BAD_REQUEST: openapi.Response(description='Validation error'),
     }
-
-    # @swagger_auto_schema(operation_id='token_refreshing', operation_description='Token refreshing',
-    #                      responses=post_responses)
-    # def post(self, request, *args, **kwargs):
-    #     return super().post(request, *args, **kwargs)
-
